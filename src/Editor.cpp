@@ -153,12 +153,10 @@ void Editor::handleMouseClick(const sf::Vector2i& mousePos) {
         case Palette::Tool::Polyline: {
             auto polyline = std::make_unique<PolylineObject>("poly_" + std::to_string(objects_.size()));
             polyline->setPosition(mousePosF);
-            polyline->setSize(sf::Vector2f(200, 150));
-            polyline->addPoint(sf::Vector2f(0, 0));
-            polyline->addPoint(sf::Vector2f(50, 100));
-            polyline->addPoint(sf::Vector2f(100, 50));
-            polyline->addPoint(sf::Vector2f(150, 100));
-            polyline->addPoint(sf::Vector2f(200, 0));
+            polyline->addPoint(mousePosF + sf::Vector2f(0, 0), true);
+            polyline->addPoint(mousePosF + sf::Vector2f(100, 100), true); 
+            polyline->addPoint(mousePosF + sf::Vector2f(200, 0), true);   
+            polyline->addPoint(mousePosF + sf::Vector2f(300, 100), true); 
             
             objects_.push_back(std::move(polyline));
             break;

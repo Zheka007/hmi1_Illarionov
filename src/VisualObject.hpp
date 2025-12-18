@@ -79,7 +79,7 @@ class PolylineObject : public VisualObject {
 public:
     PolylineObject(const std::string& id);
     void draw(sf::RenderWindow& window) const override;
-    void addPoint(const sf::Vector2f& point);
+    void addPoint(const sf::Vector2f& point, bool absolute = false);
     
 private:
     std::vector<sf::Vector2f> points_;

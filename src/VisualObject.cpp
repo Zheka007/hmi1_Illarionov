@@ -96,14 +96,18 @@ void PolylineObject::draw(sf::RenderWindow& window) const {
     
     std::vector<sf::Vertex> vertices;
     for (size_t i = 0; i < points_.size() - 1; ++i) {
-        vertices.emplace_back(sf::Vertex{points_[i], color_});
-        vertices.emplace_back(sf::Vertex{points_[i + 1], color_});
+        vertices.emplace_back(sf::Vertex{position_ + points_[i], color_});
+        vertices.emplace_back(sf::Vertex{position_ + points_[i + 1], color_});
     }
     window.draw(vertices.data(), vertices.size(), sf::PrimitiveType::Lines);
 }
 
-void PolylineObject::addPoint(const sf::Vector2f& point) {
-    points_.push_back(point);
+void PolylineObject::addPoint(const sf::Vector2f& point, bool absolute) {
+    if (absolute) {
+        points_.push_back(point - position_);
+    } else {
+        points_.push_back(point);
+    }
 }
 
 ButtonObject::ButtonObject(const std::string& id)
